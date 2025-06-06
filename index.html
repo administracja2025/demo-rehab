@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FizjoMed - Gabinet Rehabilitacyjny</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4f7cac',secondary:'#6ca6c1'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Comfortaa', cursive;
+        }
+        .hero-section {
+            background-image: url('https://readdy.ai/api/search-image?query=modern%20physiotherapy%20clinic%20interior%20with%20blue%20accents%2C%20clean%20and%20bright%20space%2C%20rehabilitation%20equipment%2C%20treatment%20tables%2C%20professional%20environment%2C%20natural%20light%2C%20plants%2C%20high-end%20medical%20facility%2C%20welcoming%20reception%20area&width=1920&height=1080&seq=hero1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .team-card {
+            transition: all 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .custom-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .checkmark {
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #4f7cac;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #4f7cac;
+        }
+        .checkmark:after {
+            content: "";
+            display: none;
+        }
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4f7cac;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .custom-radio {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .custom-radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .radio-mark {
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #4f7cac;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-radio input:checked ~ .radio-mark:after {
+            content: "";
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4f7cac;
+        }
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e5e7eb;
+            outline: none;
+        }
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f7cac;
+            cursor: pointer;
+        }
+        .range-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f7cac;
+            cursor: pointer;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-3xl font-['Pacifico'] text-primary">FizjoMed</a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="text-gray-700 hover:text-primary font-medium transition-colors">Strona główna</a>
+                    <a href="#services" class="text-gray-700 hover:text-primary font-medium transition-colors">Usługi</a>
+                    <a href="#specialists" class="text-gray-700 hover:text-primary font-medium transition-colors">Specjaliści</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-primary font-medium transition-colors">Galeria</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary font-medium transition-colors">Kontakt</a>
+                </nav>
+                
+                <a href="#appointment" class="hidden md:block bg-primary text-white px-6 py-2 !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors">Umów wizytę</a>
+                
+                <button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700">
+                    <i class="ri-menu-line ri-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-gray-700 hover:text-primary font-medium transition-colors">Strona główna</a>
+                    <a href="#services" class="text-gray-700 hover:text-primary font-medium transition-colors">Usługi</a>
+                    <a href="#specialists" class="text-gray-700 hover:text-primary font-medium transition-colors">Specjaliści</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-primary font-medium transition-colors">Galeria</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary font-medium transition-colors">Kontakt</a>
+                    <a href="#appointment" class="bg-primary text-white px-6 py-2 !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors text-center">Umów wizytę</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section relative">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="container mx-auto px-4 py-32 relative z-10">
+            <div class="max-w-2xl text-white">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Profesjonalna rehabilitacja dla Twojego zdrowia</h1>
+                <p class="text-lg mb-8">Oferujemy kompleksowe usługi rehabilitacyjne prowadzone przez doświadczonych specjalistów. Nasze nowoczesne metody terapeutyczne pomogą Ci wrócić do pełnej sprawności.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#appointment" class="bg-primary text-white px-8 py-3 !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors text-center">Zarezerwuj termin</a>
+                    <a href="#services" class="bg-white text-primary px-8 py-3 !rounded-button whitespace-nowrap hover:bg-gray-100 transition-colors text-center">Poznaj nasze usługi</a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#services" class="w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full text-white">
+                <i class="ri-arrow-down-line ri-lg"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nasze usługi rehabilitacyjne</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Oferujemy szeroki zakres usług rehabilitacyjnych dostosowanych do indywidualnych potrzeb każdego pacjenta. Nasz zespół specjalistów pomoże Ci wrócić do pełnej sprawności.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=physiotherapist%20working%20with%20patient%20on%20treatment%20table%2C%20professional%20medical%20setting%2C%20rehabilitation%20exercises%2C%20hands-on%20therapy%2C%20blue%20medical%20uniform%2C%20modern%20clinic%20interior&width=600&height=400&seq=service1&orientation=landscape" alt="Fizjoterapia" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mb-4">
+                            <i class="ri-heart-pulse-line ri-lg text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Fizjoterapia</h3>
+                        <p class="text-gray-600 mb-4">Kompleksowa diagnostyka i leczenie schorzeń narządu ruchu. Terapia manualna, ćwiczenia indywidualne i zabiegi fizykalne.</p>
+                        <button class="text-primary font-medium flex items-center hover:underline !rounded-button whitespace-nowrap">
+                            Dowiedz się więcej
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20massage%20therapy%20session%2C%20relaxing%20therapeutic%20massage%2C%20massage%20table%20with%20towels%2C%20spa-like%20environment%2C%20medical%20massage%20treatment%2C%20hands%20massaging%20back&width=600&height=400&seq=service2&orientation=landscape" alt="Masaż" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mb-4">
+                            <i class="ri-hand-heart-line ri-lg text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Masaż leczniczy</h3>
+                        <p class="text-gray-600 mb-4">Różne techniki masażu dostosowane do indywidualnych potrzeb. Masaż klasyczny, sportowy, głęboki, relaksacyjny i terapeutyczny.</p>
+                        <button class="text-primary font-medium flex items-center hover:underline !rounded-button whitespace-nowrap">
+                            Dowiedz się więcej
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=manual%20therapy%20session%2C%20therapist%20manipulating%20patients%20spine%2C%20osteopathic%20treatment%2C%20professional%20medical%20technique%2C%20hands-on%20joint%20mobilization%2C%20precise%20therapeutic%20movements&width=600&height=400&seq=service3&orientation=landscape" alt="Terapia manualna" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mb-4">
+                            <i class="ri-psychotherapy-line ri-lg text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Terapia manualna</h3>
+                        <p class="text-gray-600 mb-4">Specjalistyczne techniki terapii manualnej. Mobilizacje stawów, manipulacje, techniki tkanek miękkich i neuromobilizacje.</p>
+                        <button class="text-primary font-medium flex items-center hover:underline !rounded-button whitespace-nowrap">
+                            Dowiedz się więcej
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=sports%20rehabilitation%2C%20athlete%20recovery%20training%2C%20professional%20sports%20therapy%2C%20rehabilitation%20equipment%2C%20performance%20training%2C%20athletic%20physical%20therapy%2C%20modern%20gym%20setting&width=600&height=400&seq=service4&orientation=landscape" alt="Rehabilitacja sportowa" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mb-4">
+                            <i class="ri-run-line ri-lg text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Rehabilitacja sportowa</h3>
+                        <p class="text-gray-600 mb-4">Specjalistyczna rehabilitacja dla sportowców. Leczenie kontuzji, przygotowanie do zawodów, profilaktyka urazów i trening funkcjonalny.</p>
+                        <button class="text-primary font-medium flex items-center hover:underline !rounded-button whitespace-nowrap">
+                            Dowiedz się więcej
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#appointment" class="inline-block bg-primary text-white px-8 py-3 !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors">Umów wizytę</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <img src="https://readdy.ai/api/search-image?query=modern%20physiotherapy%20clinic%20interior%20with%20treatment%20area%2C%20rehabilitation%20equipment%2C%20bright%20and%20clean%20space%2C%20professional%20medical%20environment%2C%20blue%20accents%2C%20healing%20atmosphere%2C%20welcoming%20reception&width=800&height=600&seq=about&orientation=landscape" alt="Wnętrze gabinetu" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">O naszym gabinecie</h2>
+                    <p class="text-gray-600 mb-4">FizjoMed to nowoczesny gabinet rehabilitacyjny działający od 2010 roku. Naszym celem jest zapewnienie najwyższej jakości usług rehabilitacyjnych, które pomogą naszym pacjentom wrócić do pełnej sprawności.</p>
+                    <p class="text-gray-600 mb-6">Dysponujemy nowoczesnym sprzętem i stosujemy najnowsze metody terapeutyczne. Nasz zespół to doświadczeni specjaliści, którzy nieustannie podnoszą swoje kwalifikacje, aby zapewnić pacjentom najlepszą opiekę.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                <i class="ri-medal-line ri-lg text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">Doświadczenie</h3>
+                                <p class="text-gray-600 text-sm">Ponad 15 lat doświadczenia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                <i class="ri-team-line ri-lg text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">Specjaliści</h3>
+                                <p class="text-gray-600 text-sm">Wykwalifikowany zespół</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                <i class="ri-hospital-line ri-lg text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">Nowoczesny sprzęt</h3>
+                                <p class="text-gray-600 text-sm">Zaawansowane technologie</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                <i class="ri-user-heart-line ri-lg text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold mb-1">Indywidualne podejście</h3>
+                                <p class="text-gray-600 text-sm">Terapia dopasowana do potrzeb</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#specialists" class="inline-block bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors">Poznaj nasz zespół</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialists Section -->
+    <section id="specialists" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Nasi specjaliści</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Nasz zespół to doświadczeni i wykwalifikowani specjaliści, którzy nieustannie podnoszą swoje kwalifikacje, aby zapewnić pacjentom najlepszą opiekę.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Specialist 1 -->
+                <div class="team-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20male%20physiotherapist%20in%20blue%20medical%20uniform%2C%20confident%20pose%2C%20friendly%20smile%2C%20medical%20office%20background%2C%20mid%2040s%2C%20experienced%20doctor&width=600&height=800&seq=specialist1&orientation=portrait" alt="Dr. Adam Kowalski" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Dr. Adam Kowalski</h3>
+                        <p class="text-primary font-medium mb-3">Fizjoterapeuta, Osteopata</p>
+                        <p class="text-gray-600 mb-4">Specjalista z 15-letnim doświadczeniem w fizjoterapii i osteopatii. Absolwent AWF w Warszawie oraz licznych kursów specjalistycznych.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <i class="ri-linkedin-fill"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <i class="ri-mail-line"></i>
+                            </a>
+                            <button class="ml-auto text-primary font-medium flex items-center hover:underline !rounded-button whitespace-nowrap">
+                                Umów wizytę
+                                <i class="ri-calendar-line ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Specialist 2 -->
+                <div class="team-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20female%20physiotherapist%20in%20blue%20medical%20uniform%2C%20confident%20pose%2C%20friendly%20smile%2C%20medical%20office%20background%2C%20early%2030s%2C%20experienced%20doctor&width=600&height=800&seq=specialist2&orientation=portrait" alt="Mgr. Anna Nowak" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Mgr. Anna Nowak</h3>
+                        <p class="text-primary font-medium mb-3">Fizjoterapeuta, Terapeuta manualny</p>
+                        <p class="text-gray-600 mb-4">Specjalistka w zakresie terapii manualnej i rehabilitacji sportowej. Absolwentka AWF w Krakowie, certyfikowana terapeutka PNF.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <i class="ri-linkedin-fill"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <i class="ri-mail-line"></i>
+                            </a>
+                            <button class="ml-auto text-primary font-medium flex items-center hover:underline !rounded-button whitespace-nowrap">
+                                Umów wizytę
+                                <i class="ri-calendar-line ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Specialist 3 -->
+                <div class="team-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20male%20massage%20therapist%20in%20blue%20medical%20uniform%2C%20confident%20pose%2C%20friendly%20smile%2C%20medical%20office%20background%2C%20mid%2030s%2C%20experienced%20therapist&width=600&height=800&seq=specialist3&orientation=portrait" alt="Mgr. Piotr Wiśniewski" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Mgr. Piotr Wiśniewski</h3>
+                        <p class="text-primary font-medium mb-3">Fizjoterapeuta, Masażysta</p>
+                        <p class="text-gray-600 mb-4">Specjalista w zakresie masażu leczniczego i rehabilitacji. Absolwent Uniwersytetu Medycznego w Łodzi, certyfikowany masażysta.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <i class="ri-linkedin-fill"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-600 hover:bg-primary hover:text-white transition-colors">
+                                <i class="ri-mail-line"></i>
+                            </a>
+                            <button class="ml-auto text-primary font-medium flex items-center hover:underline !rounded-button whitespace-nowrap">
+                                Umów wizytę
+                                <i class="ri-calendar-line ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Galeria ćwiczeń i gabinetu</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Zobacz nasze nowoczesne wnętrza oraz przykładowe ćwiczenia rehabilitacyjne, które stosujemy w terapii.</p>
+            </div>
+            
+            <div class="mb-8">
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button class="gallery-filter active px-4 py-2 bg-primary text-white !rounded-full whitespace-nowrap" data-filter="all">Wszystkie</button>
+                    <button class="gallery-filter px-4 py-2 bg-gray-200 text-gray-700 !rounded-full whitespace-nowrap hover:bg-gray-300 transition-colors" data-filter="exercises">Ćwiczenia</button>
+                    <button class="gallery-filter px-4 py-2 bg-gray-200 text-gray-700 !rounded-full whitespace-nowrap hover:bg-gray-300 transition-colors" data-filter="interior">Wnętrze gabinetu</button>
+                    <button class="gallery-filter px-4 py-2 bg-gray-200 text-gray-700 !rounded-full whitespace-nowrap hover:bg-gray-300 transition-colors" data-filter="equipment">Sprzęt</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="exercises">
+                    <img src="https://readdy.ai/api/search-image?query=physiotherapist%20guiding%20patient%20through%20rehabilitation%20exercises%2C%20stretching%2C%20professional%20medical%20setting%2C%20therapeutic%20movements%2C%20blue%20medical%20uniform&width=600&height=400&seq=gallery1&orientation=landscape" alt="Ćwiczenia rehabilitacyjne" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold">Ćwiczenia rozciągające</h3>
+                        <p class="text-gray-600 text-sm">Techniki rozciągania mięśni kręgosłupa</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="interior">
+                    <img src="https://readdy.ai/api/search-image?query=modern%20physiotherapy%20clinic%20reception%20area%2C%20bright%20and%20clean%20space%2C%20blue%20accents%2C%20welcoming%20atmosphere%2C%20professional%20medical%20environment%2C%20waiting%20area&width=600&height=400&seq=gallery2&orientation=landscape" alt="Recepcja" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold">Recepcja</h3>
+                        <p class="text-gray-600 text-sm">Nowoczesna i przyjazna przestrzeń</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="equipment">
+                    <img src="https://readdy.ai/api/search-image?query=modern%20physiotherapy%20equipment%2C%20rehabilitation%20machines%2C%20medical%20devices%2C%20treatment%20tools%2C%20professional%20therapy%20equipment%2C%20blue%20accents&width=600&height=400&seq=gallery3&orientation=landscape" alt="Sprzęt rehabilitacyjny" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold">Sprzęt rehabilitacyjny</h3>
+                        <p class="text-gray-600 text-sm">Nowoczesne urządzenia do terapii</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="exercises">
+                    <img src="https://readdy.ai/api/search-image?query=physiotherapist%20working%20with%20patient%20on%20balance%20exercises%2C%20stability%20training%2C%20professional%20medical%20setting%2C%20therapeutic%20movements%2C%20blue%20medical%20uniform&width=600&height=400&seq=gallery4&orientation=landscape" alt="Ćwiczenia równoważne" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold">Ćwiczenia równoważne</h3>
+                        <p class="text-gray-600 text-sm">Trening stabilizacji i równowagi</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="interior">
+                    <img src="https://readdy.ai/api/search-image?query=modern%20physiotherapy%20treatment%20room%2C%20clean%20and%20bright%20space%2C%20treatment%20table%2C%20medical%20equipment%2C%20blue%20accents%2C%20professional%20environment&width=600&height=400&seq=gallery5&orientation=landscape" alt="Sala zabiegowa" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold">Sala zabiegowa</h3>
+                        <p class="text-gray-600 text-sm">Komfortowa przestrzeń terapeutyczna</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md cursor-pointer" data-category="equipment">
+                    <img src="https://readdy.ai/api/search-image?query=physiotherapy%20massage%20tools%2C%20manual%20therapy%20equipment%2C%20medical%20massage%20devices%2C%20treatment%20accessories%2C%20professional%20therapy%20tools%2C%20blue%20accents&width=600&height=400&seq=gallery6&orientation=landscape" alt="Narzędzia do masażu" class="w-full h-64 object-cover object-top">
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold">Narzędzia do masażu</h3>
+                        <p class="text-gray-600 text-sm">Profesjonalne akcesoria terapeutyczne</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Opinie naszych pacjentów</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Poznaj doświadczenia osób, które skorzystały z naszych usług rehabilitacyjnych.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-primary">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Po kontuzji kolana myślałem, że nie wrócę do biegania. Dzięki profesjonalnej rehabilitacji w FizjoMed, po 3 miesiącach mogłem wrócić do treningów. Polecam każdemu sportowcowi!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden mr-4">
+                            <img src="https://readdy.ai/api/search-image?query=portrait%20of%20athletic%20male%20in%20his%2030s%2C%20casual%20clothing%2C%20natural%20lighting%2C%20neutral%20background%2C%20professional%20headshot&width=100&height=100&seq=testimonial1&orientation=squarish" alt="Marek Jankowski" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Marek Jankowski</h4>
+                            <p class="text-gray-500 text-sm">Biegacz amator</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-primary">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Cierpiałam na przewlekły ból kręgosłupa przez wiele lat. Po serii zabiegów w FizjoMed odczułam znaczną ulgę. Profesjonalne podejście i skuteczna terapia. Dziękuję!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden mr-4">
+                            <img src="https://readdy.ai/api/search-image?query=portrait%20of%20middle-aged%20woman%20with%20short%20hair%2C%20casual%20clothing%2C%20natural%20lighting%2C%20neutral%20background%2C%20professional%20headshot&width=100&height=100&seq=testimonial2&orientation=squarish" alt="Katarzyna Lewandowska" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Katarzyna Lewandowska</h4>
+                            <p class="text-gray-500 text-sm">Nauczycielka</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="text-primary">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Po operacji barku potrzebowałem intensywnej rehabilitacji. Zespół FizjoMed przygotował dla mnie indywidualny program, który pomógł mi wrócić do pełnej sprawności. Bardzo profesjonalne podejście!"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full overflow-hidden mr-4">
+                            <img src="https://readdy.ai/api/search-image?query=portrait%20of%20senior%20man%20in%20his%2060s%2C%20casual%20clothing%2C%20natural%20lighting%2C%20neutral%20background%2C%20professional%20headshot&width=100&height=100&seq=testimonial3&orientation=squarish" alt="Tomasz Dąbrowski" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Tomasz Dąbrowski</h4>
+                            <p class="text-gray-500 text-sm">Emerytowany inżynier</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Section -->
+    <section id="appointment" class="py-20 bg-primary/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Umów wizytę</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Wypełnij formularz, aby umówić się na wizytę. Nasz zespół skontaktuje się z Tobą w celu potwierdzenia terminu.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <h3 class="text-2xl font-bold mb-6">Formularz kontaktowy</h3>
+                    <form id="appointment-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="first-name" class="block text-gray-700 mb-2">Imię</label>
+                                <input type="text" id="first-name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-gray-700 mb-2">Nazwisko</label>
+                                <input type="text" id="last-name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 mb-2">Telefon</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="service" class="block text-gray-700 mb-2">Usługa</label>
+                            <div class="relative">
+                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none pr-8" required>
+                                    <option value="" disabled selected>Wybierz usługę</option>
+                                    <option value="physiotherapy">Fizjoterapia</option>
+                                    <option value="massage">Masaż leczniczy</option>
+                                    <option value="manual-therapy">Terapia manualna</option>
+                                    <option value="sports-rehab">Rehabilitacja sportowa</option>
+                                </select>
+                                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                    <i class="ri-arrow-down-s-line text-gray-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="specialist" class="block text-gray-700 mb-2">Preferowany specjalista</label>
+                            <div class="relative">
+                                <select id="specialist" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none pr-8">
+                                    <option value="" disabled selected>Wybierz specjalistę</option>
+                                    <option value="adam-kowalski">Dr. Adam Kowalski</option>
+                                    <option value="anna-nowak">Mgr. Anna Nowak</option>
+                                    <option value="piotr-wisniewski">Mgr. Piotr Wiśniewski</option>
+                                    <option value="any">Dowolny specjalista</option>
+                                </select>
+                                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                    <i class="ri-arrow-down-s-line text-gray-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 mb-2">Dodatkowe informacje</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" required>
+                                <span class="checkmark mr-2"></span>
+                                <span class="text-gray-700 text-sm">Wyrażam zgodę na przetwarzanie moich danych osobowych w celu umówienia wizyty.</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary text-white py-3 !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors">Umów wizytę</button>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6">Dostępne terminy</h3>
+                        <div id="calendar" class="mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <button id="prev-month" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-700 hover:bg-gray-200 transition-colors">
+                                    <i class="ri-arrow-left-s-line"></i>
+                                </button>
+                                <h4 id="current-month" class="text-lg font-bold">Czerwiec 2025</h4>
+                                <button id="next-month" class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full text-gray-700 hover:bg-gray-200 transition-colors">
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-7 gap-2 text-center mb-2">
+                                <div class="text-gray-500 text-sm">Pon</div>
+                                <div class="text-gray-500 text-sm">Wt</div>
+                                <div class="text-gray-500 text-sm">Śr</div>
+                                <div class="text-gray-500 text-sm">Czw</div>
+                                <div class="text-gray-500 text-sm">Pt</div>
+                                <div class="text-gray-500 text-sm">Sob</div>
+                                <div class="text-gray-500 text-sm">Nd</div>
+                            </div>
+                            
+                            <div class="grid grid-cols-7 gap-2" id="calendar-days">
+                                <!-- Calendar days will be generated by JS -->
+                            </div>
+                        </div>
+                        
+                        <div id="available-hours" class="hidden">
+                            <h4 class="font-bold mb-3">Dostępne godziny na <span id="selected-date">06.06.2025</span></h4>
+                            <div class="grid grid-cols-3 gap-2" id="hours-grid">
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">8:00</button>
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">9:00</button>
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">10:00</button>
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">11:00</button>
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">12:00</button>
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">13:00</button>
+                                <button class="bg-primary text-white py-2 !rounded-button whitespace-nowrap">14:00</button>
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">15:00</button>
+                                <button class="bg-gray-100 hover:bg-primary hover:text-white text-gray-700 py-2 !rounded-button whitespace-nowrap transition-colors">16:00</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-2xl font-bold mb-6">Kontakt</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                    <i class="ri-map-pin-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Adres</h4>
+                                    <p class="text-gray-600">ul. Zdrowotna 15, 00-001 Warszawa</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                    <i class="ri-phone-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Telefon</h4>
+                                    <p class="text-gray-600">+48 123 456 789</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                    <i class="ri-mail-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p class="text-gray-600">kontakt@fizjomed.pl</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full mr-3 shrink-0">
+                                    <i class="ri-time-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Godziny otwarcia</h4>
+                                    <p class="text-gray-600">Poniedziałek - Piątek: 8:00 - 20:00</p>
+                                    <p class="text-gray-600">Sobota: 9:00 - 14:00</p>
+                                    <p class="text-gray-600">Niedziela: Zamknięte</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Jak do nas dotrzeć</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Znajdź nas w centrum Warszawy, w dogodnej lokalizacji z łatwym dostępem do komunikacji miejskiej i parkingiem dla pacjentów.</p>
+            </div>
+            
+            <div class="rounded-lg overflow-hidden shadow-md h-96 relative">
+                <div style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;" class="w-full h-full absolute"></div>
+                <div class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-md">
+                    <h3 class="font-bold mb-2">FizjoMed - Gabinet Rehabilitacyjny</h3>
+                    <p class="text-gray-600">ul. Zdrowotna 15, 00-001 Warszawa</p>
+                    <a href="https://maps.google.com" target="_blank" class="text-primary font-medium flex items-center mt-2 hover:underline">
+                        Wyznacz trasę
+                        <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <a href="#" class="text-3xl font-['Pacifico'] text-white mb-4 block">FizjoMed</a>
+                    <p class="text-gray-400 mb-6">Profesjonalny gabinet rehabilitacyjny oferujący kompleksowe usługi z zakresu fizjoterapii, masażu i terapii manualnej.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-gray-400 hover:bg-primary hover:text-white transition-colors">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-gray-400 hover:bg-primary hover:text-white transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-gray-400 hover:bg-primary hover:text-white transition-colors">
+                            <i class="ri-youtube-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Szybkie linki</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Strona główna</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Usługi</a></li>
+                        <li><a href="#specialists" class="text-gray-400 hover:text-white transition-colors">Specjaliści</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition-colors">Galeria</a></li>
+                        <li><a href="#appointment" class="text-gray-400 hover:text-white transition-colors">Umów wizytę</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Polityka prywatności</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Kontakt</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="ri-map-pin-line ri-lg mr-3 mt-1 text-primary"></i>
+                            <span class="text-gray-400">ul. Zdrowotna 15, 00-001 Warszawa</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-phone-line ri-lg mr-3 mt-1 text-primary"></i>
+                            <span class="text-gray-400">+48 123 456 789</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-mail-line ri-lg mr-3 mt-1 text-primary"></i>
+                            <span class="text-gray-400">kontakt@fizjomed.pl</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-time-line ri-lg mr-3 mt-1 text-primary"></i>
+                            <span class="text-gray-400">Pon-Pt: 8:00-20:00<br>Sob: 9:00-14:00</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Zapisz się do naszego newslettera, aby otrzymywać najnowsze informacje i promocje.</p>
+                    <form id="newsletter-form" class="mb-4">
+                        <div class="flex">
+                            <input type="email" placeholder="Twój email" class="px-4 py-2 w-full border-none rounded-l focus:outline-none text-gray-800">
+                            <button type="submit" class="bg-primary text-white px-4 py-2 !rounded-r-button whitespace-nowrap hover:bg-primary/90 transition-colors">Zapisz się</button>
+                        </div>
+                    </form>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="w-10 h-6 flex items-center justify-center bg-gray-800 rounded">
+                            <i class="ri-visa-fill text-gray-400"></i>
+                        </div>
+                        <div class="w-10 h-6 flex items-center justify-center bg-gray-800 rounded">
+                            <i class="ri-mastercard-fill text-gray-400"></i>
+                        </div>
+                        <div class="w-10 h-6 flex items-center justify-center bg-gray-800 rounded">
+                            <i class="ri-paypal-fill text-gray-400"></i>
+                        </div>
+                        <div class="w-10 h-6 flex items-center justify-center bg-gray-800 rounded">
+                            <i class="ri-bank-card-fill text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-500">© 2025 FizjoMed - Gabinet Rehabilitacyjny. Wszelkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent -->
+    <div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 z-50 flex justify-between items-center">
+        <p class="text-gray-700 text-sm">Ta strona używa plików cookie, aby zapewnić najlepszą jakość korzystania z naszej witryny. <a href="#" class="text-primary hover:underline">Dowiedz się więcej</a></p>
+        <div class="flex gap-2">
+            <button id="cookie-accept" class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap hover:bg-primary/90 transition-colors text-sm">Akceptuję</button>
+            <button id="cookie-decline" class="bg-gray-200 text-gray-700 px-4 py-2 !rounded-button whitespace-nowrap hover:bg-gray-300 transition-colors text-sm">Odrzucam</button>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg">
+        <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center">
+        <button id="close-lightbox" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full text-white">
+            <i class="ri-close-line ri-lg"></i>
+        </button>
+        <button id="prev-image" class="absolute left-4 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full text-white">
+            <i class="ri-arrow-left-line ri-lg"></i>
+        </button>
+        <img id="lightbox-image" src="" alt="Lightbox image" class="max-w-[90%] max-h-[90vh] object-contain">
+        <button id="next-image" class="absolute right-4 w-10 h-10 flex items-center justify-center bg-white/20 backdrop-blur-sm rounded-full text-white">
+            <i class="ri-arrow-right-line ri-lg"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Script -->
+    <script id="mobile-menu-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-xl"></i>';
+                } else {
+                    mobileMenuButton.innerHTML = '<i class="ri-close-line ri-xl"></i>';
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-xl"></i>';
+                });
+            });
+        });
+    </script>
+
+    <!-- Gallery Filter Script -->
+    <script id="gallery-filter-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.gallery-filter');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-primary', 'text-white');
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    this.classList.add('active', 'bg-primary', 'text-white');
+                    this.classList.remove('bg-gray-200', 'text-gray-700');
+                    
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const closeLightbox = document.getElementById('close-lightbox');
+            const prevImage = document.getElementById('prev-image');
+            const nextImage = document.getElementById('next-image');
+            
+            let currentImageIndex = 0;
+            const galleryImages = [];
+            
+            galleryItems.forEach((item, index) => {
+                const image = item.querySelector('img');
+                galleryImages.push(image.src);
+                
+                item.addEventListener('click', function() {
+                    currentImageIndex = index;
+                    lightboxImage.src = galleryImages[currentImageIndex];
+                    lightbox.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeLightbox.addEventListener('click', function() {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+            
+            prevImage.addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                lightboxImage.src = galleryImages[currentImageIndex];
+            });
+            
+            nextImage.addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                lightboxImage.src = galleryImages[currentImageIndex];
+            });
+            
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                    lightbox.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+
+    <!-- Calendar Script -->
+    <script id="calendar-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarDays = document.getElementById('calendar-days');
+            const currentMonthElement = document.getElementById('current-month');
+            const prevMonthButton = document.getElementById('prev-month');
+            const nextMonthButton = document.getElementById('next-month');
+            const availableHours = document.getElementById('available-hours');
+            const selectedDateElement = document.getElementById('selected-date');
+            
+            const months = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
+            
+            let currentDate = new Date(2025, 5, 6); // June 6, 2025
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+            
+            function generateCalendar(month, year) {
+                calendarDays.innerHTML = '';
+                
+                currentMonthElement.textContent = `${months[month]} ${year}`;
+                
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                
+                // Get the day of week for the first day (0 = Sunday, 1 = Monday, etc.)
+                let firstDayOfWeek = firstDay.getDay();
+                if (firstDayOfWeek === 0) firstDayOfWeek = 7; // Convert Sunday from 0 to 7
+                
+                // Create empty cells for days before the first day of the month
+                for (let i = 1; i < firstDayOfWeek; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.classList.add('h-10', 'flex', 'items-center', 'justify-center', 'text-gray-300');
+                    calendarDays.appendChild(emptyDay);
+                }
+                
+                // Create cells for each day of the month
+                for (let day = 1; day <= lastDay.getDate(); day++) {
+                    const dayElement = document.createElement('button');
+                    dayElement.classList.add('h-10', 'flex', 'items-center', 'justify-center', 'rounded');
+                    
+                    // Check if it's today
+                    if (day === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
+                        dayElement.classList.add('bg-primary', 'text-white');
+                    } else {
+                        dayElement.classList.add('hover:bg-gray-100');
+                    }
+                    
+                    // Check if it's a weekend (Saturday or Sunday)
+                    const dayOfWeek = new Date(year, month, day).getDay();
+                    if (dayOfWeek === 0 || dayOfWeek === 6) {
+                        dayElement.classList.add('text-gray-400');
+                    }
+                    
+                    dayElement.textContent = day;
+                    
+                    // Add click event to show available hours
+                    dayElement.addEventListener('click', function() {
+                        // Remove active class from all days
+                        document.querySelectorAll('#calendar-days button').forEach(btn => {
+                            btn.classList.remove('bg-primary', 'text-white');
+                            if (btn !== dayElement) {
+                                btn.classList.add('hover:bg-gray-100');
+                            }
+                        });
+                        
+                        // Add active class to clicked day
+                        dayElement.classList.add('bg-primary', 'text-white');
+                        dayElement.classList.remove('hover:bg-gray-100');
+                        
+                        // Format date as DD.MM.YYYY
+                        const formattedDate = `${day.toString().padStart(2, '0')}.${(month + 1).toString().padStart(2, '0')}.${year}`;
+                        selectedDateElement.textContent = formattedDate;
+                        
+                        // Show available hours
+                        availableHours.classList.remove('hidden');
+                    });
+                    
+                    calendarDays.appendChild(dayElement);
+                }
+            }
+            
+            // Initialize calendar
+            generateCalendar(currentMonth, currentYear);
+            
+            // Previous month button
+            prevMonthButton.addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentMonth, currentYear);
+                availableHours.classList.add('hidden');
+            });
+            
+            // Next month button
+            nextMonthButton.addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar(currentMonth, currentYear);
+                availableHours.classList.add('hidden');
+            });
+            
+            // Hour selection
+            const hourButtons = document.querySelectorAll('#hours-grid button');
+            hourButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    hourButtons.forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        if (btn !== button) {
+                            btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-primary', 'hover:text-white');
+                        }
+                    });
+                    
+                    button.classList.add('bg-primary', 'text-white');
+                    button.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-primary', 'hover:text-white');
+                });
+            });
+        });
+    </script>
+
+    <!-- Form Submission Script -->
+    <script id="form-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const appointmentForm = document.getElementById('appointment-form');
+            const newsletterForm = document.getElementById('newsletter-form');
+            
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                
+                submitButton.textContent = 'Wysyłanie...';
+                submitButton.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Dziękujemy za wypełnienie formularza! Skontaktujemy się z Tobą w celu potwierdzenia terminu wizyty.');
+                    appointmentForm.reset();
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 1500);
+            });
+            
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulate form submission
+                const emailInput = this.querySelector('input[type="email"]');
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                
+                submitButton.textContent = 'Wysyłanie...';
+                submitButton.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Dziękujemy za zapisanie się do newslettera!');
+                    emailInput.value = '';
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 1500);
+            });
+        });
+    </script>
+
+    <!-- Cookie Consent Script -->
+    <script id="cookie-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieConsent = document.getElementById('cookie-consent');
+            const acceptButton = document.getElementById('cookie-accept');
+            const declineButton = document.getElementById('cookie-decline');
+            
+            // Check if user has already made a choice
+            const cookieChoice = localStorage.getItem('cookieConsent');
+            
+            if (cookieChoice) {
+                cookieConsent.style.display = 'none';
+            }
+            
+            acceptButton.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'accepted');
+                cookieConsent.style.display = 'none';
+            });
+            
+            declineButton.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'declined');
+                cookieConsent.style.display = 'none';
+            });
+        });
+    </script>
+
+    <!-- Back to Top Script -->
+    <script id="back-to-top-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Smooth Scroll Script -->
+    <script id="smooth-scroll-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80, // Adjust for header height
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
